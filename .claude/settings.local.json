@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:simpleicons.org)",
+      "WebFetch(domain:worldvectorlogo.com)",
+      "WebFetch(domain:svgl.app)"
+    ]
+  }
+}
