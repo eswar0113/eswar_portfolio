@@ -333,6 +333,11 @@ img { max-width: 100%; }
   width: 2.2rem;
   height: 2.2rem;
 }
+.skill-img {
+  width: 2.2rem;
+  height: 2.2rem;
+  object-fit: contain;
+}
 
 /* DSA highlight tile */
 .skill-tile--dsa {
