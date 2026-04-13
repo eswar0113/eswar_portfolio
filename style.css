@@ -526,6 +526,12 @@ img { max-width: 100%; }
   color: var(--primary);
   flex-shrink: 0;
 }
+.contact-lc-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
 .contact-label {
   display: block;
   font-size: 0.78rem;
