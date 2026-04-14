@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eswar V | Portfolio</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 </head>
@@ -16,7 +18,7 @@
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#home" class="nav-logo">Eswar V</a>
+      <a href="#home" class="nav-logo">ESWAR V</a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -33,10 +35,11 @@
 
   <!-- Hero -->
   <section class="hero" id="home">
+    <canvas id="particles-canvas"></canvas>
     <div class="hero-content">
       <p class="hero-greeting">Hi, I'm</p>
-      <h1 class="hero-name">Eswar V</h1>
-      <p class="hero-tagline">ECE Student &nbsp;|&nbsp; AI & Web Developer &nbsp;|&nbsp; Problem Solver</p>
+      <h1 class="hero-name">ESWAR V<span class="name-dot"></span></h1>
+      <p class="hero-tagline"><span id="typewriter"></span><span class="typewriter-cursor"></span></p>
       <p class="hero-sub">Building intelligent systems and seamless web experiences.</p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -44,8 +47,7 @@
       </div>
       <div class="hero-socials">
         <a href="mailto:eswar.v321@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="
-www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
         <a href="https://github.com/eswar0113" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
         <a href="https://leetcode.com/u/eswar4493" target="_blank" title="LeetCode">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +68,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
       <div class="about-grid">
         <div class="about-text">
           <p>
-            I'm a final-year <strong>Electronics and Communication Engineering</strong> student at
+            I'm a <strong>Electronics and Communication Engineering</strong> student at
             KPR Institute of Engineering and Technology, Coimbatore (CGPA: 7.82), graduating in 2027.
           </p>
           <p>
@@ -81,19 +83,19 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
         </div>
         <div class="about-stats">
           <div class="stat-card">
-            <span class="stat-number">200+</span>
+            <span class="stat-number" data-count="200" data-suffix="+">200+</span>
             <span class="stat-label">DSA Problems Solved</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">3+</span>
+            <span class="stat-number" data-count="3" data-suffix="+">3+</span>
             <span class="stat-label">Projects Delivered</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">2</span>
+            <span class="stat-number" data-count="2" data-suffix="">2</span>
             <span class="stat-label">Internships</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">7.82</span>
+            <span class="stat-number" data-count="7.82" data-suffix="">7.82</span>
             <span class="stat-label">CGPA</span>
           </div>
         </div>
@@ -173,7 +175,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
               <span>Copilot</span>
             </div>
             <div class="skill-tile">
-              <img src="https://cdn.simpleicons.org/openai/10a37f" class="skill-img" alt="ChatGPT" />
+              <img src="https://cdn.simpleicons.org/chatgpt/74aa9c" class="skill-img" alt="ChatGPT" />
               <span>ChatGPT</span>
             </div>
             <div class="skill-tile">
@@ -218,10 +220,8 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
               <span class="timeline-date">Aug 2025 – Oct 2025</span>
             </div>
             <ul>
-              <li>Designed and optimized responsive web pages using HTML, CSS, and JavaScript, improving cross-device
-                usability.</li>
-              <li>Leveraged modern AI tools and platforms to accelerate development outcomes and improve code quality.
-              </li>
+              <li>Designed and optimized responsive web pages using HTML, CSS, and JavaScript, improving cross-device usability.</li>
+              <li>Leveraged modern AI tools and platforms to accelerate development outcomes and improve code quality.</li>
             </ul>
           </div>
         </div>
@@ -237,10 +237,8 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
               <span class="timeline-date">Feb 2025 – Mar 2025</span>
             </div>
             <ul>
-              <li>Developed an AI-powered Resume Screening System to automatically filter and rank candidates based on
-                job descriptions, improving recruitment efficiency.</li>
-              <li>Gained hands-on experience in data preprocessing, feature extraction, and ranking algorithms,
-                enhancing skills in Python and machine learning.</li>
+              <li>Developed an AI-powered Resume Screening System to automatically filter and rank candidates based on job descriptions, improving recruitment efficiency.</li>
+              <li>Gained hands-on experience in data preprocessing, feature extraction, and ranking algorithms, enhancing skills in Python and machine learning.</li>
             </ul>
           </div>
         </div>
@@ -258,8 +256,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-parking"></i></div>
           <h3>Real-Time Smart Parking Solution</h3>
-          <p>An IoT-based parking tracking system using ESP32 sensors and Map APIs to visualize real-time slot
-            availability, reducing driver search time in simulated tests.</p>
+          <p>An IoT-based parking tracking system using ESP32 sensors and Map APIs to visualize real-time slot availability, reducing driver search time in simulated tests.</p>
           <div class="project-tags">
             <span>HTML</span><span>CSS</span><span>JavaScript</span><span>ESP32</span><span>Map API</span>
           </div>
@@ -268,8 +265,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-tasks"></i></div>
           <h3>Student Task Tracker</h3>
-          <p>A task management app for students to add, update, delete, and track academic tasks with deadlines and
-            status indicators. Built with a full SQL backend.</p>
+          <p>A task management app for students to add, update, delete, and track academic tasks with deadlines and status indicators. Built with a full SQL backend.</p>
           <div class="project-tags">
             <span>HTML</span><span>CSS</span><span>JavaScript</span><span>SQL</span>
           </div>
@@ -278,8 +274,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
         <div class="project-card">
           <div class="project-icon"><i class="fas fa-seedling"></i></div>
           <h3>Crop Recommendation System</h3>
-          <p>A machine learning system that suggests the best crop based on soil and weather data, deployed on Vercel.
-            Helps farmers improve yield and reduce losses.</p>
+          <p>A machine learning system that suggests the best crop based on soil and weather data, deployed on Vercel. Helps farmers improve yield and reduce losses.</p>
           <div class="project-tags">
             <span>Python</span><span>Firebase</span><span>Vercel</span><span>ML</span>
           </div>
@@ -370,7 +365,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
           </div>
         </a>
 
-        <a href="https://linkedin.com" target="_blank" class="contact-card">
+        <a href="https://www.linkedin.com/in/eswar13" target="_blank" class="contact-card">
           <i class="fab fa-linkedin"></i>
           <div>
             <span class="contact-label">LinkedIn</span>
@@ -386,7 +381,7 @@ www.linkedin.com/in/eswar13" target="_blank" title="LinkedIn"><i class="fab fa-l
           </div>
         </a>
 
-        <a href="https://leetcode.com/u/eswar0113" target="_blank" class="contact-card">
+        <a href="https://leetcode.com/u/eswar4493" target="_blank" class="contact-card">
           <svg class="contact-lc-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/>
           </svg>
