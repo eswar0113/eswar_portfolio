@@ -28,33 +28,105 @@ const sectionObserver = new IntersectionObserver(entries => {
 sections.forEach(s => sectionObserver.observe(s));
 
 // ===== FADE-IN ON SCROLL =====
+// Use class-based fade so JS 3D tilt can freely set inline transform after reveal.
+const dynStyle = document.createElement('style');
+dynStyle.textContent = `
+  .fade-ready         { opacity: 0; transform: translateY(20px) scale(0.98); }
+  .fade-ready.visible { opacity: 1; transform: none; }
+  .nav-links a.active { color: var(--green) !important; }
+`;
+document.head.appendChild(dynStyle);
+
+const FADE_DUR = 520; // ms — matches transition below
 const fadeEls = document.querySelectorAll(
   '.stat-card, .skill-tile, .timeline-item, .project-card, .cert-card, .contact-card, .skills-group'
 );
 
 const fadeObserver = new IntersectionObserver(entries => {
   entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), 70 * (i % 9));
-      fadeObserver.unobserve(entry.target);
-    }
+    if (!entry.isIntersecting) return;
+    const el    = entry.target;
+    const delay = 60 * (i % 9);
+    setTimeout(() => {
+      el.classList.add('visible');
+      // After the transition, strip both classes so inline transform (tilt) works freely
+      setTimeout(() => {
+        el.classList.remove('fade-ready', 'visible');
+        el.style.transition = '';
+      }, FADE_DUR + 40);
+    }, delay);
+    fadeObserver.unobserve(el);
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.07 });
 
 fadeEls.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(22px)';
-  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  el.classList.add('fade-ready');
+  el.style.transition = `opacity ${FADE_DUR}ms cubic-bezier(0.22,1,0.36,1), transform ${FADE_DUR}ms cubic-bezier(0.22,1,0.36,1)`;
   fadeObserver.observe(el);
 });
 
-// Inject active / visible CSS
-const dynStyle = document.createElement('style');
-dynStyle.textContent = `
-  .visible { opacity: 1 !important; transform: translateY(0) !important; }
-  .nav-links a.active { color: var(--primary) !important; }
-`;
-document.head.appendChild(dynStyle);
+// ===== 3D TILT + GLARE =====
+function initTilt(selector, maxTilt, glareAlpha) {
+  document.querySelectorAll(selector).forEach(card => {
+    // Inject glare overlay
+    const glare = document.createElement('div');
+    glare.className = 'card-glare';
+    card.appendChild(glare);
+
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.08s linear, border-color 0.25s, box-shadow 0.25s';
+    });
+
+    card.addEventListener('mousemove', e => {
+      const r   = card.getBoundingClientRect();
+      const x   = e.clientX - r.left;
+      const y   = e.clientY - r.top;
+      const cx  = r.width  / 2;
+      const cy  = r.height / 2;
+      const rotY =  ((x - cx) / cx) * maxTilt;
+      const rotX = -((y - cy) / cy) * (maxTilt * 0.75);
+      card.style.transform =
+        `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(12px)`;
+      // Glare follows cursor
+      const gx = (x / r.width)  * 100;
+      const gy = (y / r.height) * 100;
+      glare.style.background =
+        `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,${glareAlpha}), transparent 68%)`;
+      glare.style.opacity = '1';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.6s cubic-bezier(0.22,1,0.36,1), border-color 0.25s, box-shadow 0.25s';
+      card.style.transform  = '';
+      glare.style.opacity   = '0';
+    });
+  });
+}
+
+// Project cards: more dramatic tilt; stat cards: subtler
+initTilt('.project-card', 11, 0.10);
+initTilt('.stat-card',    7,  0.07);
+
+// ===== 3D SKILL TILE FLOAT =====
+// Gentle individual tilt on each skill tile (no glare — too small)
+document.querySelectorAll('.skill-tile').forEach(tile => {
+  tile.addEventListener('mouseenter', () => {
+    tile.style.transition = 'transform 0.08s linear, border-color 0.2s, box-shadow 0.2s, background 0.2s';
+  });
+  tile.addEventListener('mousemove', e => {
+    const r   = tile.getBoundingClientRect();
+    const x   = e.clientX - r.left;
+    const y   = e.clientY - r.top;
+    const rotY =  ((x - r.width  / 2) / (r.width  / 2)) * 14;
+    const rotX = -((y - r.height / 2) / (r.height / 2)) * 14;
+    tile.style.transform =
+      `perspective(300px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(8px)`;
+  });
+  tile.addEventListener('mouseleave', () => {
+    tile.style.transition = 'transform 0.55s cubic-bezier(0.22,1,0.36,1), border-color 0.2s, box-shadow 0.2s, background 0.2s';
+    tile.style.transform  = '';
+  });
+});
 
 // ===== TYPEWRITER =====
 const roles = [
